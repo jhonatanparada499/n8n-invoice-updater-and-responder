@@ -6,7 +6,7 @@ The purpose of this self-hosted [n8n](https://n8n.io) automation workflow is to 
 
 - [OpenAI API](https://platform.openai.com/)
 - [Google Cloud Gmail API](https://console.cloud.google.com/)
-- [Google Sheets API] (https://developers.google.com/sheets)
+- [Google Sheets API](https://developers.google.com/sheets)
 - [Google Drive API](https://developers.google.com/drive)
 
 ## How It Operates
