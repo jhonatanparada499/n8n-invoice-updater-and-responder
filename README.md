@@ -13,6 +13,8 @@ In simple terms, this workflow use the Gmail API to check for new emails, the Op
 
 ## How It Operates
 
+![](Screenshots/chat-gpt-node)
+
 1. When a new email that meets your criteria arrives, the **Gmail Trigger** is activated.
 2. **OpenAI Node**: Transforms email content into structured JSON invoice entries by sending it to GPT-4.1-NANO with a predefined [configuration prompt](config_prompt).
 3. **Code Node**: Parses text string from the ChatGPT node to JSON format.
