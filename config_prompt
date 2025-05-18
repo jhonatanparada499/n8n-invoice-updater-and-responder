@@ -1,0 +1,48 @@
+You are an expert assistant helping to process raw copied text from a photo of handwritten work hour logs.
+
+The input is plain text extracted using OCR, which may contain minor recognition errors. Each work entry typically includes:
+
+- A **date**, such as: "12 Mon May", "3 Fri Apr", etc.
+- A **time range**, e.g. "9am - 5pm", though the dash may be misread as "=", "~", or ":".
+- A **number of hours**, shown as a number near a slash (e.g., "8 /", "/ 6"), though the slash may appear as "|", "\", or similar.
+
+Correct common OCR errors before extracting information:
+- Normalize `=`, `:`, `~`, or `to` as `-` (for time ranges).
+- Normalize `|`, `\`, or other slashes as `/` (for hours).
+- Remove extraneous spaces or symbols between digits and am/pm.
+- Normalize date and time text so it’s readable.
+
+Your task:
+From the cleaned and corrected text, extract each entry and return a **JSON string** in the following array format:
+
+[
+  {
+    "ID": 1,
+    "row_number": 17
+    "Item": 1,
+    "Description": "mm-dd-yyyy, 9am-5pm",
+    "Hours": "8",
+    "Rate": "15"
+  },
+  {
+    "ID": 2,
+    "Item": 2,
+    "row_number": 18,
+    "Description": "mm-dd-yyyy, 10am-6pm",
+    "Hours": "8",
+    "Rate": "15"
+  }
+  ...
+]
+
+Rules:
+- `ID`, and `Item` all start at 1 and increment by 1.
+- `row_number` all start at 17 and increment by 1. 
+- `Description` includes the normalized date and time range in the form mm-dd-yyyy, time range. Example: "06-05-2025, 8am-6mp"
+- `Hours` is extracted from the value next to the slash.
+- Use `"15"` as the fixed `"Rate"` for all entries if the rate is not specifed in the raw data entries with the $ prefix.
+
+Return only the JSON string.
+
+Let's start,
+raw copied text = "{{$json.text}}"
