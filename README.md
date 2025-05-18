@@ -1,4 +1,5 @@
 # Report Generator & Invoice Auto-Responder (n8n)
+![](screenshots/n8n_.png)
 
 The purpose of this self-hosted [n8n](https://n8n.io) workflow is to automate the process of invoice creation and PDF formatting.
 In simple terms, this workflow use the Gmail API to check for new emails, the OpenAI API to extract and process hand-written work log entries, Google Sheets API to update an invoice template with formatted invoice data, Google Drive to create and download a PDF report, and lastly, it sends the final invoice PDF to the a specific recipient.
