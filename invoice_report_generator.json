@@ -3,10 +3,10 @@
   "nodes": [
     {
       "parameters": {
-        "sendTo": "jhonatanparada499@gmail.com",
-        "subject": "Factura Semanal",
+        "sendTo": "your_email@gmail.com",
+        "subject": "your_subject_title",
         "emailType": "text",
-        "message": "Hola Sandra, tu factura semanal esta lista.",
+        "message": "your_custom_message_here",
         "options": {
           "attachmentsUi": {
             "attachmentsBinary": [
@@ -55,7 +55,7 @@
         },
         "simple": false,
         "filters": {
-          "q": "from:jhonatanparada499@gmail.com OR from:samitomo06@gmail.com"
+          "q": "from:your_email@gmail.com OR from:your_recipient_email@gmail.com"
         },
         "options": {}
       },
@@ -81,7 +81,7 @@
           "__rl": true,
           "value": "1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk",
           "mode": "list",
-          "cachedResultName": "Sandra_Invoice_Template",
+          "cachedResultName": "your_invoice_Template",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit?usp=drivesdk"
         },
         "options": {
@@ -116,7 +116,7 @@
           "__rl": true,
           "value": "1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk",
           "mode": "list",
-          "cachedResultName": "Sandra_Invoice_Template",
+          "cachedResultName": "your_invoice_Template",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit?usp=drivesdk"
         },
         "sheetName": {
@@ -234,7 +234,7 @@
           "__rl": true,
           "value": "1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk",
           "mode": "list",
-          "cachedResultName": "Sandra_Invoice_Template",
+          "cachedResultName": "your_invoice_Template",
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit?usp=drivesdk"
         },
         "sheetName": {
