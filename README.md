@@ -1,4 +1,4 @@
-# Report Generator & Invoice Auto-Responder (n8n)
+# Invoice Updater and Auto-Responder (n8n)
 ![](Screenshots/n8n_.png)
 
 The purpose of this self-hosted [n8n](https://n8n.io) workflow is to automate the process of invoice creation and PDF formatting.
