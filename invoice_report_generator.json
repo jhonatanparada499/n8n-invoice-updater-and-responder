@@ -1,0 +1,383 @@
+{
+  "name": "Invoice Auto-Responder & Report Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "sendTo": "jhonatanparada499@gmail.com",
+        "subject": "Factura Semanal",
+        "emailType": "text",
+        "message": "Hola Sandra, tu factura semanal esta lista.",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        420,
+        320
+      ],
+      "id": "0db8ee04-3322-499b-80ea-aad4798a9a57",
+      "name": "Gmail",
+      "webhookId": "5fa0086e-49d3-4279-b15d-d77d1383b113",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Ypib4fuU2HhVPLXP",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// For ChatInput use (Testing)\n//const jsonString = $input.first().json.message.content.trim();\nconst jsonString = $input.first().json.message.content.trim();\n\n// For Gmail API use (Production)\n//const jsonString = $input.first().json.content.trim();\n\n// Parse the string into JSON array\nconst dataArray = JSON.parse(jsonString);\n\n// Return each item as separate item (so next node loops properly)\nreturn dataArray.map(item => ({ json: item }));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -100,
+        320
+      ],
+      "id": "d649e769-6196-4e81-a6f3-bfddafaa7559",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "custom"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "from:jhonatanparada499@gmail.com OR from:samitomo06@gmail.com"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -780,
+        320
+      ],
+      "id": "72d0e2a7-8b41-4069-8082-58a8a4c7b7cc",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Ypib4fuU2HhVPLXP",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk",
+          "mode": "list",
+          "cachedResultName": "Sandra_Invoice_Template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit?usp=drivesdk"
+        },
+        "options": {
+          "googleFileConversion": {
+            "conversion": {
+              "sheetsToFormat": "application/pdf"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        240,
+        320
+      ],
+      "id": "eb55b808-0660-4c7b-8d66-a5d3dcd446e6",
+      "name": "Google Drive1",
+      "executeOnce": true,
+      "retryOnFail": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "JhSkRy4ghVYtWWXz",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk",
+          "mode": "list",
+          "cachedResultName": "Sandra_Invoice_Template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1997051967,
+          "mode": "list",
+          "cachedResultName": "Timesheet invoice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit#gid=1997051967"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "ID"
+          ],
+          "schema": [
+            {
+              "id": "ID",
+              "displayName": "ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Item",
+              "displayName": "Item",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Description",
+              "displayName": "Description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Hours",
+              "displayName": "Hours",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Rate",
+              "displayName": "Rate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Amount",
+              "displayName": "Amount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {
+          "locationDefine": {
+            "values": {
+              "headerRow": 16,
+              "firstDataRow": 17
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        80,
+        320
+      ],
+      "id": "08b24415-8036-4422-8e57-05151951f387",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5f2nlON78FimqcUF",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "clear",
+        "documentId": {
+          "__rl": true,
+          "value": "1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk",
+          "mode": "list",
+          "cachedResultName": "Sandra_Invoice_Template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1997051967,
+          "mode": "list",
+          "cachedResultName": "Timesheet invoice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1oK-vHufIj0_j5ERiZaCJdBk3dF9pteSVhCGZsZMhWUk/edit#gid=1997051967"
+        },
+        "clear": "specificRange",
+        "range": "B17:E24"
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        -280,
+        320
+      ],
+      "id": "9c83bfa4-85cc-4015-9dd6-09ec8d0db3e6",
+      "name": "Google Sheets1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "5f2nlON78FimqcUF",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "GPT-4.1-NANO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an expert assistant helping to process raw copied text from a photo of handwritten work hour logs.\n\nThe input is plain text extracted using OCR, which may contain minor recognition errors. Each work entry typically includes:\n\n- A **date**, such as: \"12 Mon May\", \"3 Fri Apr\", etc.\n- A **time range**, e.g. \"9am - 5pm\", though the dash may be misread as \"=\", \"~\", or \":\".\n- A **number of hours**, shown as a number near a slash (e.g., \"8 /\", \"/ 6\"), though the slash may appear as \"|\", \"\\\", or similar.\n\nCorrect common OCR errors before extracting information:\n- Normalize `=`, `:`, `~`, or `to` as `-` (for time ranges).\n- Normalize `|`, `\\`, or other slashes as `/` (for hours).\n- Remove extraneous spaces or symbols between digits and am/pm.\n- Normalize date and time text so it’s readable.\n\nYour task:\nFrom the cleaned and corrected text, extract each entry and return a **JSON string** in the following array format:\n\n[\n  {\n    \"ID\": 1,\n    \"row_number\": 17\n    \"Item\": 1,\n    \"Description\": \"mm-dd-yyyy, 9am-5pm\",\n    \"Hours\": \"8\",\n    \"Rate\": \"15\"\n  },\n  {\n    \"ID\": 2,\n    \"Item\": 2,\n    \"row_number\": 18,\n    \"Description\": \"mm-dd-yyyy, 10am-6pm\",\n    \"Hours\": \"8\",\n    \"Rate\": \"15\"\n  }\n  ...\n]\n\nRules:\n- `ID`, and `Item` all start at 1 and increment by 1.\n- `row_number` all start at 17 and increment by 1. \n- `Description` includes the normalized date and time range in the form mm-dd-yyyy, time range. Example: \"06-05-2025, 8am-6mp\"\n- `Hours` is extracted from the value next to the slash.\n- Use `\"15\"` as the fixed `\"Rate\"` for all entries if the rate is not specifed in the raw data entries with the $ prefix.\n\nReturn only the JSON string.\n\nLet's start,\nraw copied text = \"{{$json.text}}\""
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -600,
+        320
+      ],
+      "id": "2677cad0-19c6-4f07-8d2b-e621bafe8bf4",
+      "name": "OpenAI1",
+      "credentials": {
+        "openAiApi": {
+          "id": "Npsrq0svxmd1cgvl",
+          "name": "OpenAi account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive1": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail": {
+      "main": [
+        []
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Google Drive1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI1": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "21399d2f-b6a9-471d-85b0-1c8cbede6de9",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ebe186f0b3317833643d1553319096139c442de60e0cb89f25284030330516e8"
+  },
+  "id": "gc0qXdLaH39nVAPm",
+  "tags": []
+}
