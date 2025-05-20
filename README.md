@@ -34,3 +34,4 @@ In simple terms, this workflow use the Gmail API to check for new emails, the Op
 
 ## Notes
 - This workflow runs fully on a self-hosted n8n instance.
+- You can hoste this automation on the cloud for free. I used this tutorial: [Setting up a free n8n server on Oracle Cloud](https://www.thomasmartens.eu/setting-up-a-free-n8n-server-on-oracle-cloud/)  
